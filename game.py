@@ -63,6 +63,6 @@ class Game:
             self.board[source] = None
         if self.current_player == 'black':
             self.turn_counter = self.turn_counter + 1
-        self.current_player, self.next_player = self.next_player, self.current_player
+            self.current_player, self.next_player = self.next_player, self.current_player
         else:
             print("Invalid move!")
