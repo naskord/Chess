@@ -1,3 +1,4 @@
+import pieces
 class Game:
 
     def __init__(self):
