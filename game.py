@@ -1,3 +1,4 @@
+from itertools import product
 from pieces import Pawn, Knight, Bishop, Rook, Queen, King
 
 
@@ -23,19 +24,14 @@ class Game:
 
     @property
     def white_pieces(self):
-        for col in 'ABCDEFGH':
-            for row in '12345678':
-                if self.board[col + row].color == 'white':
-                    _white_pieces.append(self.board[col + row])
-        return self._white_pieces
-
+        return [self.board[address[0] + address[1]] for address in product('ABCDEFGH','12345678')
+         if  self.board[address[0] + address[1]] and self.board[address[0] + address[1]].color == 'white']
+    
     @property
     def black_pieces(self):
-        for col in 'ABCDEFGH':
-            for row in '12345678':
-                if self.board[col + row].color == 'black':
-                    _white_pieces.append(self.board[col + row])
-        return self._black_pieces
+        return [self.board[address[0] + address[1]] for address in product('ABCDEFGH','12345678')
+         if self.board[address[0] + address[1]] and self.board[address[0] + address[1]].color == 'black']
+    
 
     def print_board(self):
         print('  A  B  C  D  E  F  G  H')
