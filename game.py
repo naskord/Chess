@@ -1,4 +1,6 @@
-import pieces
+from pieces import Pawn, Knight, Bishop, Rook, Queen, King
+
+
 class Game:
 
     def __init__(self):
