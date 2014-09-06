@@ -125,6 +125,8 @@ class Game:
         return False
 
     def poor_material(self, collection):
+        if collection is None:
+            return False
         if len(collection) == 1:
             return 1
         elif len(collection) == 2:
