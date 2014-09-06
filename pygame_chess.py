@@ -276,7 +276,7 @@ def run_game():
                         source_selected = True
                         coords_source = coords
                     elif source_selected and source == find_address(coords):
-                        demark(coords, white)
+                        demark(coords, WHITE)
                         source_selected = False
                     elif source_selected:
                         target = find_address(coords)
