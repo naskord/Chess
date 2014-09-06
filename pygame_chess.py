@@ -17,7 +17,7 @@ DISPLAY = pygame.display.set_mode((1000, 600))
 DISPLAY.fill(GREEN)
 pygame.display.set_caption('chess ')
 
-size = 66
+SIZE = 66
 startx = 10
 starty = 10
 
@@ -45,29 +45,29 @@ def drawBoard():
     for x in range(0, 8):
         for y in range(0, 8):
             if x % 2 == 0 and y % 2 == 0:
-                rectangle = (startx + x*size, starty + y*size, size, size)
+                rectangle = (startx + x*SIZE, starty + y*SIZE, SIZE, SIZE)
                 pygame.draw.rect(DISPLAY, WHITE, rectangle)
             elif x % 2 == 0 and y % 2 != 0:
-                rectangle = (startx + x*size, starty + y*size, size, size)
+                rectangle = (startx + x*SIZE, starty + y*SIZE, SIZE, SIZE)
                 pygame.draw.rect(DISPLAY, GRAY, rectangle)
             elif x % 2 != 0 and y % 2 == 0:
-                rectangle = (startx + x*size, starty + y*size, size, size)
+                rectangle = (startx + x*SIZE, starty + y*SIZE, SIZE, SIZE)
                 pygame.draw.rect(DISPLAY, GRAY, rectangle)
             elif x % 2 != 0 and y % 2 != 0:
-                rectangle = (starty + x*size, starty + y*size, size, size)
+                rectangle = (starty + x*SIZE, starty + y*SIZE, SIZE, SIZE)
                 pygame.draw.rect(DISPLAY, WHITE, rectangle)
 
 
 def in_board(coords):
-    return coords[0] >= startx and coords[0] <= startx + 8*size and \
-        coords[1] >= starty and coords[1] <= starty + 8*size
+    return coords[0] >= startx and coords[0] <= startx + 8*SIZE and \
+        coords[1] >= starty and coords[1] <= starty + 8*SIZE
 
 
 def mark(coords, color):
-    dimx = int((coords[0]-startx)/size)
-    dimy = int((coords[1]-starty)/size)
-    rectangle = (startx + dimx*size + 3, starty + dimy*size + 3,
-                 size - 7, size - 7)
+    dimx = int((coords[0]-startx)/SIZE)
+    dimy = int((coords[1]-starty)/SIZE)
+    rectangle = (startx + dimx*SIZE + 3, starty + dimy*SIZE + 3,
+                 SIZE - 7, SIZE - 7)
     pygame.draw.rect(DISPLAY, color, rectangle, 8)
 
 
@@ -78,8 +78,8 @@ def demark(coords, color):
     else:
         width = 8
         offset = 3
-    dimx = int((coords[0]-startx)/size)
-    dimy = int((coords[1]-starty)/size)
+    dimx = int((coords[0]-startx)/SIZE)
+    dimy = int((coords[1]-starty)/SIZE)
     if dimx % 2 == 0 and dimy % 2 == 0:
         color = WHITE
     if dimx % 2 == 0 and dimy % 2 != 0:
@@ -88,8 +88,8 @@ def demark(coords, color):
         color = GRAY
     if dimx % 2 != 0 and dimy % 2 != 0:
         color = WHITE
-    rectangle = (startx + dimx*size + offset, starty + dimy*size + offset,
-                 size - width + 1, size - width + 1)
+    rectangle = (startx + dimx*SIZE + offset, starty + dimy*SIZE + offset,
+                 SIZE - width + 1, SIZE - width + 1)
     pygame.draw.rect(DISPLAY, color, rectangle, width)
 
 
@@ -99,31 +99,31 @@ def maketext(text, style, tcolor):
 
 
 def find_address(coords):
-    dimx = int((coords[0]-startx)/size)
-    dimy = int((coords[1]-starty)/size)
+    dimx = int((coords[0]-startx)/SIZE)
+    dimy = int((coords[1]-starty)/SIZE)
     return chr(dimx + ord('A')) + str(8-dimy)
 
 
 def show_msg(text, coords, color):
     style = pygame.font.Font('freesansbold.ttf', 35)
     titlesurf, titlerect = maketext(text, style, color)
-    titlerect.center = (coords[0] + int(size/2), coords[1] + int(size/2))
+    titlerect.center = (coords[0] + int(SIZE/2), coords[1] + int(SIZE/2))
     DISPLAY.blit(titlesurf, titlerect)
     pygame.display.update()
 
 
 def new_game_button():
-    pygame.draw.rect(DISPLAY, SILVER, (600, 10, 250, size))
+    pygame.draw.rect(DISPLAY, SILVER, (600, 10, 250, SIZE))
     show_msg('NEW GAME', (700, 10), BLACK)
 
 
 def resign_button():
-    pygame.draw.rect(DISPLAY, SILVER, (600, 90, 250, size))
+    pygame.draw.rect(DISPLAY, SILVER, (600, 90, 250, SIZE))
     show_msg('RESIGN', (700, 90), BLACK)
 
 
 def quit_button():
-    pygame.draw.rect(DISPLAY, SILVER, (600, 170, 250, size))
+    pygame.draw.rect(DISPLAY, SILVER, (600, 170, 250, SIZE))
     show_msg('QUIT', (700, 170), BLACK)
 
 
@@ -200,10 +200,10 @@ def show_pieces(game):
         for y in range(0, 8):
             if game.board[x][y]:
                 key = game.board[x][y].color + game.board[x][y].sign[0].lower()
-                coordinates = (startx + x*size, starty + (7-y)*size)
+                coordinates = (startx + x*SIZE, starty + (7-y)*SIZE)
                 DISPLAY.blit(chess_set[key], coordinates)
             else:
-                demark((startx + x*size, starty + (7-y)*size), None)
+                demark((startx + x*SIZE, starty + (7-y)*SIZE), None)
 
 
 def check_mate_draw(game):
